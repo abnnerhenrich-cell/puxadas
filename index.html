@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Puxada da Kelly Menezes</title>
+
+  <style>
+    :root{
+      --bg0:#040e1f;
+      --bg1:#071a33;
+
+      --cardA: rgba(10,35,68,.78);
+      --cardB: rgba(8,28,56,.78);
+
+      --line: rgba(120,190,255,.18);
+      --line2: rgba(120,190,255,.30);
+
+      --txt:#eef6ff;
+      --muted:#a9c6f6;
+
+      --accent:#35a7ff;
+      --accent2:#7be0ff;
+
+      --warn:#ffd56a;
+
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --shadow2: 0 10px 28px rgba(0,0,0,.28);
+
+      --radius:22px;
+      --radius2:18px;
+    }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--txt);
+      background:
+        radial-gradient(1200px 800px at 18% 10%, rgba(53,167,255,.22), transparent 60%),
+        radial-gradient(900px 700px at 85% 18%, rgba(123,224,255,.16), transparent 55%),
+        radial-gradient(1000px 700px at 55% 105%, rgba(53,167,255,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    body.modal-open{ overflow:hidden; }
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding: 22px 16px calc(34px + env(safe-area-inset-bottom));
+    }
+
+    /* HEADER */
+    header{
+      padding: 18px 0 14px;
+      margin-bottom: 14px;
+    }
+    .hero{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      min-width:260px;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:18px;
+      background: linear-gradient(180deg, rgba(53,167,255,.22), rgba(7,26,51,.15));
+      border:1px solid rgba(123,224,255,.25);
+      box-shadow: 0 14px 35px rgba(0,0,0,.30);
+      display:grid;place-items:center;
+      position: relative;overflow:hidden;
+    }
+    .logo::after{
+      content:"";position:absolute;inset:-60%;
+      background: conic-gradient(from 180deg, rgba(123,224,255,.0), rgba(123,224,255,.28), rgba(53,167,255,.0));
+      animation: spin 5.5s linear infinite;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg); } }
+    .logo span{
+      position:relative;z-index:1;
+      font-size:28px;
+      filter: drop-shadow(0 10px 12px rgba(0,0,0,.35));
+    }
+    .titles{display:flex;flex-direction:column;gap:3px;}
+    h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:.2px;
+      line-height:1.1;
+    }
+    .by{
+      margin:0;
+      color: rgba(169,198,246,.92);
+      font-size:13px;
+    }
+    .by b{ color: var(--accent2); font-weight:900; }
+
+    /* SEARCH */
+    .tools{flex:1;min-width:260px;display:flex;justify-content:flex-end;}
+    .search{
+      width:min(540px,100%);
+      display:flex;align-items:center;gap:10px;
+      padding: 12px 14px;
+      border-radius:999px;
+      background: rgba(10,35,68,.55);
+      border:1px solid rgba(123,224,255,.22);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(12px);
+    }
+    .searchIcon{
+      width:34px;height:34px;border-radius:999px;
+      display:grid;place-items:center;
+      background: rgba(53,167,255,.10);
+      border:1px solid rgba(53,167,255,.18);
+      flex:0 0 auto;
+    }
+    .search input{
+      border:none;outline:none;background:transparent;color:var(--txt);
+      width:100%;font-size:14px;
+    }
+    .search input::placeholder{ color: rgba(169,198,246,.70); }
+    .pill{
+      flex:0 0 auto;
+      font-size:12px;
+      color: rgba(234,246,255,.92);
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(4,14,31,.35);
+      border:1px solid rgba(123,224,255,.18);
+      white-space:nowrap;
+    }
+
+    /* GRID + CARDS */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap:14px;
+      margin-top: 14px;
+    }
+
+    .card{
+      position:relative;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--cardA), var(--cardB));
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      cursor:pointer;
+      transition: transform .14s ease, border-color .14s ease, filter .14s ease;
+      will-change: transform;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(650px 240px at 15% 0%, rgba(123,224,255,.16), transparent 55%),
+        radial-gradient(520px 220px at 95% 0%, rgba(53,167,255,.14), transparent 60%);
+      pointer-events:none;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(53,167,255,.55);
+      filter: brightness(1.03);
+    }
+
+    .cardInner{
+      position:relative;
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height: 118px;
+    }
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .left{display:flex;align-items:center;gap:12px;min-width:0;}
+
+    .bichoIcon{
+      width:52px;height:52px;border-radius:18px;
+      display:grid;place-items:center;
+      background: rgba(53,167,255,.12);
+      border: 1px solid rgba(53,167,255,.22);
+      font-size:30px;
+      flex:0 0 auto;
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+    }
+
+    .bichoName{
+      margin:0;
+      font-weight: 950;
+      font-size:16px;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .meta{
+      margin:2px 0 0;
+      color: rgba(169,198,246,.92);
+      font-size:12.5px;
+      line-height:1.35;
+    }
+    .badgeCount{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,224,255,.20);
+      background: rgba(4,14,31,.32);
+      color: rgba(234,246,255,.95);
+      flex:0 0 auto;
+    }
+
+    .hint{
+      color: rgba(169,198,246,.82);
+      font-size:12.5px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .spark{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(123,224,255,.92);
+      box-shadow: 0 0 18px rgba(123,224,255,.65);
+    }
+
+    /* MODAL (CORRIGIDO 100% + lindo no celular) */
+    .modalWrap{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.62);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:
+        calc(16px + env(safe-area-inset-top))
+        16px
+        calc(16px + env(safe-area-inset-bottom))
+        16px;
+      z-index: 999;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal{
+      width: min(920px, 100%);
+      max-height: min(86vh, 760px);
+      display:flex;
+      flex-direction:column;
+      border-radius: 26px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(10,35,68,.98), rgba(6,18,40,.98));
+      border: 1px solid rgba(123,224,255,.26);
+      box-shadow: 0 30px 90px rgba(0,0,0,.60);
+      transform: translateY(6px) scale(.99);
+      opacity: .98;
+      animation: pop .16s ease-out forwards;
+    }
+    @keyframes pop{
+      to{ transform: translateY(0) scale(1); opacity:1; }
+    }
+
+    .modalHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 14px 14px 12px;
+      border-bottom:1px solid rgba(123,224,255,.14);
+      position: sticky;
+      top: 0;
+      background: linear-gradient(180deg, rgba(10,35,68,.98), rgba(10,35,68,.88));
+      backdrop-filter: blur(10px);
+      z-index: 2;
+    }
+
+    .mhLeft{display:flex;align-items:center;gap:12px;min-width:0;}
+    .mhIcon{
+      width:54px;height:54px;border-radius:18px;
+      display:grid;place-items:center;
+      background: rgba(53,167,255,.12);
+      border:1px solid rgba(53,167,255,.22);
+      font-size:30px;
+      flex:0 0 auto;
+      box-shadow: 0 12px 26px rgba(0,0,0,.28);
+    }
+    .mhTitles{min-width:0;display:flex;flex-direction:column;gap:2px;}
+    .mhTitles strong{
+      font-size:18px;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .mhTitles span{
+      font-size:12.5px;
+      color: rgba(169,198,246,.90);
+    }
+
+    /* ✅ Botão fechar fixo e bonito (não invade o conteúdo) */
+    .closeBtn{
+      border:none;
+      border-radius: 16px;
+      padding: 10px 12px;
+      font-weight: 950;
+      cursor:pointer;
+      background: rgba(53,167,255,.14);
+      border:1px solid rgba(53,167,255,.26);
+      color: var(--txt);
+      transition: filter .12s ease, transform .12s ease;
+      flex:0 0 auto;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .closeBtn:hover{ filter: brightness(1.08); }
+    .closeBtn:active{ transform: scale(.98); }
+
+    /* Conteúdo rolável dentro do modal */
+    .modalBody{
+      padding: 14px 14px 16px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .sectionTitle{
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: .42px;
+      text-transform: uppercase;
+      color: rgba(169,198,246,.86);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .sectionTitle::before{
+      content:"";
+      width:10px;height:10px;border-radius:999px;
+      background: rgba(53,167,255,.75);
+      box-shadow: 0 0 22px rgba(53,167,255,.45);
+    }
+
+    .list{ display:grid; gap:10px; }
+
+    .item{
+      border-radius: 18px;
+      background: rgba(4,14,31,.36);
+      border:1px solid rgba(123,224,255,.14);
+      padding: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .itemLeft{display:flex;align-items:center;gap:10px;min-width:0;}
+    .itemEmoji{
+      width:38px;height:38px;border-radius:14px;
+      display:grid;place-items:center;
+      background: rgba(53,167,255,.10);
+      border:1px solid rgba(53,167,255,.18);
+      font-size:20px;
+      flex:0 0 auto;
+    }
+    .itemTxt{min-width:0;display:flex;flex-direction:column;gap:2px;}
+    .itemTxt b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .itemTxt small{color: rgba(169,198,246,.80);font-size:12px;}
+
+    .num{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-weight: 950;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(53,167,255,.12);
+      border: 1px solid rgba(53,167,255,.24);
+      color: var(--accent2);
+      white-space: nowrap;
+      flex:0 0 auto;
+      box-shadow: 0 10px 18px rgba(0,0,0,.18);
+    }
+
+    .divider{
+      height:1px;
+      background: rgba(123,224,255,.12);
+      margin: 14px 0;
+    }
+
+    .pregoItem{
+      border-radius:18px;
+      padding:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: rgba(255,213,106,.08);
+      border: 1px dashed rgba(255,213,106,.42);
+    }
+    .pregoItem b{ color: var(--warn); }
+
+    /* MOBILE */
+    @media (max-width: 520px){
+      h1{ font-size:20px; }
+      .logo{ width:52px;height:52px;border-radius:16px; }
+      .bichoIcon{ width:50px;height:50px;border-radius:16px; }
+      .modal{ max-height: 88vh; border-radius: 22px; }
+      .mhIcon{ width:50px;height:50px;border-radius:16px; }
+      .closeBtn{ padding:10px 10px; border-radius:14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="hero">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"><span>🧿</span></div>
+          <div class="titles">
+            <h1>Puxada da Kelly Menezes</h1>
+          </div>
+        </div>
+
+        <div class="tools">
+          <div class="search" role="search">
+            <div class="searchIcon" aria-hidden="true">🔎</div>
+            <input id="q" type="search" placeholder="Buscar bicho ou número… (ex: águia, 0007, 1295)" autocomplete="off" />
+            <div class="pill" id="count">—</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid" id="grid"></section>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modalWrap" id="modalWrap" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalHeader">
+        <div class="mhLeft">
+          <div class="mhIcon" id="modalEmoji">🐾</div>
+          <div class="mhTitles">
+            <strong id="modalTitle">Bicho</strong>
+            <span id="modalSub">O que puxa</span>
+          </div>
+        </div>
+        <button class="closeBtn" id="closeBtn">Fechar <span aria-hidden="true">✕</span></button>
+      </div>
+
+      <div class="modalBody">
+        <p class="sectionTitle">Puxa</p>
+        <div class="list" id="modalList"></div>
+
+        <div class="divider"></div>
+
+        <p class="sectionTitle">Prego</p>
+        <div class="list" id="pregoList"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const EMOJI = {
+    "Avestruz":"🦩","Pavão":"🦚","Elefante":"🐘","Touro":"🐂","Vaca":"🐄",
+    "Águia":"🦅","Aguia":"🦅","Borboleta":"🦋","Gato":"🐈","Jacaré":"🐊",
+    "Coelho":"🐇","Veado":"🦌","Burro":"🫏","Carneiro":"🐑","Cachorro":"🐕",
+    "Camelo":"🐫","Cobra":"🐍","Leão":"🦁","Urso":"🐻","Cabra":"🐐",
+    "Galo":"🐓","Cavalo":"🐴","Peru":"🦃","Macaco":"🐒","Porco":"🐖","Tigre":"🐯"
+  };
+  const emo = (name)=> EMOJI[name] || "🐾";
+
+  const DATA = [
+    { bicho:"Avestruz", puxa:[
+      {bicho:"Pavão", num:"4775"},
+      {bicho:"Elefante", num:"1448"},
+      {bicho:"Touro", num:"1681"},
+      {bicho:"Vaca", num:"0800"}
+    ], pregos:[] },
+
+    { bicho:"Águia", puxa:[
+      {bicho:"Borboleta", num:"7116"},
+      {bicho:"Gato", num:"5555"},
+      {bicho:"Jacaré", num:"0458"},
+      {bicho:"Coelho", num:"2640"}
+    ], pregos:[{bicho:"Veado", num:"1295"}] },
+
+    { bicho:"Burro", puxa:[
+      {bicho:"Águia", num:"1808"},
+      {bicho:"Carneiro", num:"9228"},
+      {bicho:"Cachorro", num:"0317"},
+      {bicho:"Camelo", num:"1130"}
+    ], pregos:[] },
+
+    { bicho:"Borboleta", puxa:[
+      {bicho:"Cobra", num:"1234"},
+      {bicho:"Leão", num:"2361"},
+      {bicho:"Elefante", num:"1245"},
+      {bicho:"Jacaré", num:"0759"}
+    ], pregos:[{bicho:"Touro", num:"1982"}] },
+
+    { bicho:"Cachorro", puxa:[
+      {bicho:"Gato", num:"8556"},
+      {bicho:"Macaco", num:"2666"},
+      {bicho:"Urso", num:"2690"},
+      {bicho:"Vaca", num:"4700"}
+    ], pregos:[{bicho:"Peru", num:"3677"},{bicho:"Tigre", num:"1988"}] },
+
+    { bicho:"Cabra", puxa:[
+      {bicho:"Leão", num:"0861"},
+      {bicho:"Veado", num:"2794"},
+      {bicho:"Macaco", num:"6167"},
+      {bicho:"Camelo", num:"9730"}
+    ], pregos:[{bicho:"Pavão", num:"1973"}] },
+
+    { bicho:"Carneiro", puxa:[
+      {bicho:"Galo", num:"1350"},
+      {bicho:"Borboleta", num:"7814"},
+      {bicho:"Águia", num:"1908"},
+      {bicho:"Vaca", num:"1998"}
+    ], pregos:[{bicho:"Porco", num:"0369"}] },
+
+    { bicho:"Camelo", puxa:[
+      {bicho:"Urso", num:"4992"},
+      {bicho:"Cavalo", num:"3944"},
+      {bicho:"Tigre", num:"1387"},
+      {bicho:"Elefante", num:"9147"}
+    ], pregos:[{bicho:"Macaco", num:"6766"}] },
+
+    { bicho:"Cobra", puxa:[
+      {bicho:"Gato", num:"6254"},
+      {bicho:"Pavão", num:"9774"},
+      {bicho:"Borboleta", num:"2515"},
+      {bicho:"Peru", num:"1977"}
+    ], pregos:[{bicho:"Leão", num:"1963"}] },
+
+    { bicho:"Coelho", puxa:[
+      {bicho:"Carneiro", num:"5527"},
+      {bicho:"Cachorro", num:"7220"},
+      {bicho:"Cabra", num:"4123"},
+      {bicho:"Urso", num:"0292"}
+    ], pregos:[{bicho:"Jacaré", num:"1660"}] },
+
+    { bicho:"Cavalo", puxa:[
+      {bicho:"Burro", num:"1009"},
+      {bicho:"Galo", num:"1449"},
+      {bicho:"Peru", num:"0177"},
+      {bicho:"Cobra", num:"2535"}
+    ], pregos:[{bicho:"Gato", num:"3153"}] },
+
+    { bicho:"Elefante", puxa:[
+      {bicho:"Urso", num:"2690"},
+      {bicho:"Borboleta", num:"9013"},
+      {bicho:"Porco", num:"3472"},
+      {bicho:"Veado", num:"9796"}
+    ], pregos:[{bicho:"Galo", num:"3450"}] },
+
+    { bicho:"Galo", puxa:[
+      {bicho:"Cavalo", num:"6141"},
+      {bicho:"Coelho", num:"0137"},
+      {bicho:"Jacaré", num:"3258"},
+      {bicho:"Vaca", num:"1000"}
+    ], pregos:[{bicho:"Elefante", num:"3748"}] },
+
+    { bicho:"Gato", puxa:[
+      {bicho:"Cachorro", num:"4519"},
+      {bicho:"Leão", num:"7562"},
+      {bicho:"Peru", num:"0278"},
+      {bicho:"Tigre", num:"2285"}
+    ], pregos:[{bicho:"Cavalo", num:"0741"}] },
+
+    { bicho:"Jacaré", puxa:[
+      {bicho:"Borboleta", num:"3113"},
+      {bicho:"Veado", num:"3995"},
+      {bicho:"Cachorro", num:"2018"},
+      {bicho:"Pavão", num:"0173"}
+    ], pregos:[{bicho:"Coelho", num:"5238"}] },
+
+    { bicho:"Leão", puxa:[
+      {bicho:"Gato", num:"1854"},
+      {bicho:"Jacaré", num:"8558"},
+      {bicho:"Elefante", num:"8248"},
+      {bicho:"Borboleta", num:"2213"}
+    ], pregos:[{bicho:"Cobra", num:"1333"}] },
+
+    { bicho:"Macaco", puxa:[
+      {bicho:"Águia", num:"0108"},
+      {bicho:"Coelho", num:"1940"},
+      {bicho:"Gato", num:"4454"},
+      {bicho:"Vaca", num:"3097"}
+    ], pregos:[{bicho:"Camelo", num:"1331"}] },
+
+    { bicho:"Porco", puxa:[
+      {bicho:"Elefante", num:"5545"},
+      {bicho:"Burro", num:"2011"},
+      {bicho:"Avestruz", num:"3503"},
+      {bicho:"Cachorro", num:"9220"}
+    ], pregos:[{bicho:"Carneiro", num:"7126"}] },
+
+    { bicho:"Pavão", puxa:[
+      {bicho:"Touro", num:"2883"},
+      {bicho:"Urso", num:"1990"},
+      {bicho:"Cobra", num:"2636"},
+      {bicho:"Avestruz", num:"1001"}
+    ], pregos:[{bicho:"Cabra", num:"2222"}] },
+
+    { bicho:"Peru", puxa:[
+      {bicho:"Tigre", num:"9886"},
+      {bicho:"Macaco", num:"0268"},
+      {bicho:"Cavalo", num:"0342"},
+      {bicho:"Vaca", num:"3798"}
+    ], pregos:[{bicho:"Cachorro", num:"7418"}] },
+
+    { bicho:"Touro", puxa:[
+      {bicho:"Cavalo", num:"1444"},
+      {bicho:"Pavão", num:"1575"},
+      {bicho:"Cabra", num:"0221"},
+      {bicho:"Vaca", num:"7700"}
+    ], pregos:[{bicho:"Borboleta", num:"9815"}] },
+
+    { bicho:"Tigre", puxa:[
+      {bicho:"Peru", num:"1980"},
+      {bicho:"Borboleta", num:"8115"},
+      {bicho:"Gato", num:"1853"},
+      {bicho:"Leão", num:"2163"}
+    ], pregos:[{bicho:"Burro", num:"3009"}] },
+
+    { bicho:"Urso", puxa:[
+      {bicho:"Borboleta", num:"0816"},
+      {bicho:"Cavalo", num:"2743"},
+      {bicho:"Camelo", num:"9229"},
+      {bicho:"Carneiro", num:"3827"}
+    ], pregos:[{bicho:"Águia", num:"0008"}] },
+
+    { bicho:"Veado", puxa:[
+      {bicho:"Elefante", num:"1345"},
+      {bicho:"Burro", num:"2510"},
+      {bicho:"Vaca", num:"9999"},
+      {bicho:"Galo", num:"1250"}
+    ], pregos:[{bicho:"Avestruz", num:"0301"}] },
+
+    { bicho:"Vaca", puxa:[
+      {bicho:"Avestruz", num:"4704"},
+      {bicho:"Elefante", num:"5445"},
+      {bicho:"Veado", num:"0993"},
+      {bicho:"Touro", num:"1983"}
+    ], pregos:[{bicho:"Vaca", num:"0000"}] },
+  ];
+
+  const grid = document.getElementById("grid");
+  const q = document.getElementById("q");
+  const count = document.getElementById("count");
+
+  const modalWrap = document.getElementById("modalWrap");
+  const modalEmoji = document.getElementById("modalEmoji");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalSub   = document.getElementById("modalSub");
+  const modalList  = document.getElementById("modalList");
+  const pregoList  = document.getElementById("pregoList");
+  const closeBtn   = document.getElementById("closeBtn");
+
+  function normalize(s){
+    return (s||"").toString().toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  }
+  function buildSearchText(item){
+    const parts = [item.bicho];
+    (item.puxa||[]).forEach(x=>parts.push(x.bicho, x.num));
+    (item.pregos||[]).forEach(x=>parts.push("prego", x.bicho, x.num));
+    return normalize(parts.join(" | "));
+  }
+
+  function renderCards(list){
+    grid.innerHTML = "";
+    list.forEach(item=>{
+      const total = item.puxa?.length || 0;
+      const pregos = item.pregos?.length || 0;
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="cardInner">
+          <div class="row">
+            <div class="left">
+              <div class="bichoIcon">${emo(item.bicho)}</div>
+              <div style="min-width:0;">
+                <p class="bichoName">${item.bicho}</p>
+                <div class="meta">${total} puxadas${pregos ? ` • ${pregos} prego(s)` : ""}</div>
+              </div>
+            </div>
+            <div class="badgeCount">${total}</div>
+          </div>
+
+          <div class="hint">
+            <span style="display:flex;align-items:center;gap:8px;">
+              <span class="spark"></span>
+              Toque para abrir
+            </span>
+            <span style="color: rgba(169,198,246,.75); font-size:12px;">Ver detalhes</span>
+          </div>
+        </div>
+      `;
+      card.addEventListener("click", ()=>openModal(item));
+      grid.appendChild(card);
+    });
+    count.textContent = `${list.length} bichos`;
+  }
+
+  function makeRow(bicho, num, note="Puxada"){
+    const row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = `
+      <div class="itemLeft">
+        <div class="itemEmoji">${emo(bicho)}</div>
+        <div class="itemTxt">
+          <b>${bicho}</b>
+          <small>${note}</small>
+        </div>
+      </div>
+      <div class="num">${num}</div>
+    `;
+    return row;
+  }
+
+  function makePregoRow(bicho, num){
+    const row = document.createElement("div");
+    row.className = "pregoItem";
+    row.innerHTML = `
+      <div class="itemLeft">
+        <div class="itemEmoji">🔩</div>
+        <div class="itemTxt">
+          <b>Prego ${bicho}</b>
+          <small>Entrada de prego</small>
+        </div>
+      </div>
+      <div class="num">${num}</div>
+    `;
+    return row;
+  }
+
+  function openModal(item){
+    modalEmoji.textContent = emo(item.bicho);
+    modalTitle.textContent = item.bicho;
+    modalSub.textContent = "O que puxa";
+
+    modalList.innerHTML = "";
+    pregoList.innerHTML = "";
+
+    (item.puxa||[]).forEach(x=>{
+      modalList.appendChild(makeRow(x.bicho, x.num, "Puxada"));
+    });
+
+    if((item.pregos||[]).length){
+      (item.pregos||[]).forEach(p=>{
+        pregoList.appendChild(makePregoRow(p.bicho, p.num));
+      });
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "pregoItem";
+      empty.innerHTML = `
+        <div class="itemLeft">
+          <div class="itemEmoji">🔩</div>
+          <div class="itemTxt">
+            <b>Sem prego</b>
+            <small>Não informado</small>
+          </div>
+        </div>
+        <div class="num">—</div>
+      `;
+      pregoList.appendChild(empty);
+    }
+
+    document.body.classList.add("modal-open");
+    modalWrap.style.display = "flex";
+    modalWrap.setAttribute("aria-hidden","false");
+  }
+
+  function closeModal(){
+    modalWrap.style.display = "none";
+    modalWrap.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-open");
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+  modalWrap.addEventListener("click", (e)=>{ if(e.target===modalWrap) closeModal(); });
+  window.addEventListener("keydown", (e)=>{ if(e.key==="Escape") closeModal(); });
+
+  function filterData(term){
+    const t = normalize(term).trim();
+    if(!t) return DATA;
+    return DATA.filter(item => buildSearchText(item).includes(t));
+  }
+
+  q.addEventListener("input", ()=> renderCards(filterData(q.value)));
+  renderCards(DATA);
+</script>
+</body>
+</html>

@@ -479,328 +479,256 @@
   const emo = (name)=> EMOJI[name] || "🐾";
 
   const DATA = [
-    { bicho:"Avestruz", puxa:[
-      {bicho:"Pavão", num:"4775"},
-      {bicho:"Elefante", num:"1448"},
-      {bicho:"Touro", num:"1681"},
-      {bicho:"Vaca", num:"0800"}
-    ], pregos:[] },
+    { bicho:"Avestruz",
+      puxa:[
+        {bicho:"Pavão", num:"4775"},
+        {bicho:"Elefante", num:"1448"},
+        {bicho:"Touro", num:"1681"},
+        {bicho:"Vaca", num:"0800"}
+      ],
+      pregos:[{bicho:"Veado", num:"1295"}]
+    },
 
-    { bicho:"Águia", puxa:[
-      {bicho:"Borboleta", num:"7116"},
-      {bicho:"Gato", num:"5555"},
-      {bicho:"Jacaré", num:"0458"},
-      {bicho:"Coelho", num:"2640"}
-    ], pregos:[{bicho:"Veado", num:"1295"}] },
+    { bicho:"Águia",
+      puxa:[
+        {bicho:"Borboleta", num:"7116"},
+        {bicho:"Gato", num:"5555"},
+        {bicho:"Jacaré", num:"0458"},
+        {bicho:"Coelho", num:"2640"}
+      ],
+      pregos:[{bicho:"Urso", num:"0389"}]
+    },
 
-    { bicho:"Burro", puxa:[
-      {bicho:"Águia", num:"1808"},
-      {bicho:"Carneiro", num:"9228"},
-      {bicho:"Cachorro", num:"0317"},
-      {bicho:"Camelo", num:"1130"}
-    ], pregos:[] },
+    { bicho:"Burro",
+      puxa:[
+        {bicho:"Águia", num:"1808"},
+        {bicho:"Carneiro", num:"9228"},
+        {bicho:"Cachorro", num:"0317"},
+        {bicho:"Camelo", num:"1130"}
+      ],
+      pregos:[{bicho:"Tigre", num:"8888"}]
+    },
 
-    { bicho:"Borboleta", puxa:[
-      {bicho:"Cobra", num:"1234"},
-      {bicho:"Leão", num:"2361"},
-      {bicho:"Elefante", num:"1245"},
-      {bicho:"Jacaré", num:"0759"}
-    ], pregos:[{bicho:"Touro", num:"1982"}] },
+    { bicho:"Borboleta",
+      puxa:[
+        {bicho:"Cobra", num:"1234"},
+        {bicho:"Leão", num:"2361"},
+        {bicho:"Elefante", num:"1245"},
+        {bicho:"Jacaré", num:"0759"}
+      ],
+      pregos:[{bicho:"Touro", num:"1982"}]
+    },
 
-    { bicho:"Cachorro", puxa:[
-      {bicho:"Gato", num:"8556"},
-      {bicho:"Macaco", num:"2666"},
-      {bicho:"Urso", num:"2690"},
-      {bicho:"Vaca", num:"4700"}
-    ], pregos:[{bicho:"Peru", num:"3677"},{bicho:"Tigre", num:"1988"}] },
+    { bicho:"Cachorro",
+      puxa:[
+        {bicho:"Gato", num:"8556"},
+        {bicho:"Macaco", num:"2666"},
+        {bicho:"Urso", num:"2690"},
+        {bicho:"Vaca", num:"4700"}
+      ],
+      pregos:[{bicho:"Peru", num:"3677"}]
+    },
 
-    { bicho:"Cabra", puxa:[
-      {bicho:"Leão", num:"0861"},
-      {bicho:"Veado", num:"2794"},
-      {bicho:"Macaco", num:"6167"},
-      {bicho:"Camelo", num:"9730"}
-    ], pregos:[{bicho:"Pavão", num:"1973"}] },
+    { bicho:"Cabra",
+      puxa:[
+        {bicho:"Leão", num:"0861"},
+        {bicho:"Veado", num:"2794"},
+        {bicho:"Macaco", num:"6167"},
+        {bicho:"Camelo", num:"9730"}
+      ],
+      pregos:[{bicho:"Pavão", num:"1973"}]
+    },
 
-    { bicho:"Carneiro", puxa:[
-      {bicho:"Galo", num:"1350"},
-      {bicho:"Borboleta", num:"7814"},
-      {bicho:"Águia", num:"1908"},
-      {bicho:"Vaca", num:"1998"}
-    ], pregos:[{bicho:"Porco", num:"0369"}] },
+    { bicho:"Carneiro",
+      puxa:[
+        {bicho:"Galo", num:"1350"},
+        {bicho:"Borboleta", num:"7814"},
+        {bicho:"Águia", num:"1908"},
+        {bicho:"Vaca", num:"1998"}
+      ],
+      pregos:[{bicho:"Porco", num:"0369"}]
+    },
 
-    { bicho:"Camelo", puxa:[
-      {bicho:"Urso", num:"4992"},
-      {bicho:"Cavalo", num:"3944"},
-      {bicho:"Tigre", num:"1387"},
-      {bicho:"Elefante", num:"9147"}
-    ], pregos:[{bicho:"Macaco", num:"6766"}] },
+    { bicho:"Camelo",
+      puxa:[
+        {bicho:"Urso", num:"4992"},
+        {bicho:"Cavalo", num:"3944"},
+        {bicho:"Tigre", num:"1387"},
+        {bicho:"Elefante", num:"9147"}
+      ],
+      pregos:[{bicho:"Macaco", num:"6766"}]
+    },
 
-    { bicho:"Cobra", puxa:[
-      {bicho:"Gato", num:"6254"},
-      {bicho:"Pavão", num:"9774"},
-      {bicho:"Borboleta", num:"2515"},
-      {bicho:"Peru", num:"1977"}
-    ], pregos:[{bicho:"Leão", num:"1963"}] },
+    { bicho:"Cobra",
+      puxa:[
+        {bicho:"Gato", num:"6254"},
+        {bicho:"Pavão", num:"9774"},
+        {bicho:"Borboleta", num:"2515"},
+        {bicho:"Peru", num:"1977"}
+      ],
+      pregos:[{bicho:"Leão", num:"1963"}]
+    },
 
-    { bicho:"Coelho", puxa:[
-      {bicho:"Carneiro", num:"5527"},
-      {bicho:"Cachorro", num:"7220"},
-      {bicho:"Cabra", num:"4123"},
-      {bicho:"Urso", num:"0292"}
-    ], pregos:[{bicho:"Jacaré", num:"1660"}] },
+    { bicho:"Coelho",
+      puxa:[
+        {bicho:"Carneiro", num:"5527"},
+        {bicho:"Cachorro", num:"7220"},
+        {bicho:"Cabra", num:"4123"},
+        {bicho:"Urso", num:"0292"}
+      ],
+      pregos:[{bicho:"Jacaré", num:"1660"}]
+    },
 
-    { bicho:"Cavalo", puxa:[
-      {bicho:"Burro", num:"1009"},
-      {bicho:"Galo", num:"1449"},
-      {bicho:"Peru", num:"0177"},
-      {bicho:"Cobra", num:"2535"}
-    ], pregos:[{bicho:"Gato", num:"3153"}] },
+    { bicho:"Cavalo",
+      puxa:[
+        {bicho:"Burro", num:"1009"},
+        {bicho:"Galo", num:"1449"},
+        {bicho:"Peru", num:"0177"},
+        {bicho:"Cobra", num:"2535"}
+      ],
+      pregos:[{bicho:"Gato", num:"3153"}]
+    },
 
-    { bicho:"Elefante", puxa:[
-      {bicho:"Urso", num:"2690"},
-      {bicho:"Borboleta", num:"9013"},
-      {bicho:"Porco", num:"3472"},
-      {bicho:"Veado", num:"9796"}
-    ], pregos:[{bicho:"Galo", num:"3450"}] },
+    { bicho:"Elefante",
+      puxa:[
+        {bicho:"Urso", num:"2690"},
+        {bicho:"Borboleta", num:"9013"},
+        {bicho:"Porco", num:"3472"},
+        {bicho:"Veado", num:"9796"}
+      ],
+      pregos:[{bicho:"Galo", num:"3450"}]
+    },
 
-    { bicho:"Galo", puxa:[
-      {bicho:"Cavalo", num:"6141"},
-      {bicho:"Coelho", num:"0137"},
-      {bicho:"Jacaré", num:"3258"},
-      {bicho:"Vaca", num:"1000"}
-    ], pregos:[{bicho:"Elefante", num:"3748"}] },
+    { bicho:"Galo",
+      puxa:[
+        {bicho:"Cavalo", num:"6141"},
+        {bicho:"Coelho", num:"0137"},
+        {bicho:"Jacaré", num:"3258"},
+        {bicho:"Vaca", num:"1000"}
+      ],
+      pregos:[{bicho:"Elefante", num:"3748"}]
+    },
 
-    { bicho:"Gato", puxa:[
-      {bicho:"Cachorro", num:"4519"},
-      {bicho:"Leão", num:"7562"},
-      {bicho:"Peru", num:"0278"},
-      {bicho:"Tigre", num:"2285"}
-    ], pregos:[{bicho:"Cavalo", num:"0741"}] },
+    { bicho:"Gato",
+      puxa:[
+        {bicho:"Cachorro", num:"4519"},
+        {bicho:"Leão", num:"7562"},
+        {bicho:"Peru", num:"0278"},
+        {bicho:"Tigre", num:"2285"}
+      ],
+      pregos:[{bicho:"Cavalo", num:"0741"}]
+    },
 
-    { bicho:"Jacaré", puxa:[
-      {bicho:"Borboleta", num:"3113"},
-      {bicho:"Veado", num:"3995"},
-      {bicho:"Cachorro", num:"2018"},
-      {bicho:"Pavão", num:"0173"}
-    ], pregos:[{bicho:"Coelho", num:"5238"}] },
+    { bicho:"Jacaré",
+      puxa:[
+        {bicho:"Borboleta", num:"3113"},
+        {bicho:"Veado", num:"3995"},
+        {bicho:"Cachorro", num:"2018"},
+        {bicho:"Pavão", num:"0173"}
+      ],
+      pregos:[{bicho:"Coelho", num:"5238"}]
+    },
 
-    { bicho:"Leão", puxa:[
-      {bicho:"Gato", num:"1854"},
-      {bicho:"Jacaré", num:"8558"},
-      {bicho:"Elefante", num:"8248"},
-      {bicho:"Borboleta", num:"2213"}
-    ], pregos:[{bicho:"Cobra", num:"1333"}] },
+    { bicho:"Leão",
+      puxa:[
+        {bicho:"Gato", num:"1854"},
+        {bicho:"Jacaré", num:"8558"},
+        {bicho:"Elefante", num:"8248"},
+        {bicho:"Borboleta", num:"2213"}
+      ],
+      pregos:[{bicho:"Cobra", num:"1333"}]
+    },
 
-    { bicho:"Macaco", puxa:[
-      {bicho:"Águia", num:"0108"},
-      {bicho:"Coelho", num:"1940"},
-      {bicho:"Gato", num:"4454"},
-      {bicho:"Vaca", num:"3097"}
-    ], pregos:[{bicho:"Camelo", num:"1331"}] },
+    { bicho:"Macaco",
+      puxa:[
+        {bicho:"Águia", num:"0108"},
+        {bicho:"Coelho", num:"1940"},
+        {bicho:"Gato", num:"4454"},
+        {bicho:"Vaca", num:"3097"}
+      ],
+      pregos:[{bicho:"Camelo", num:"1331"}]
+    },
 
-    { bicho:"Porco", puxa:[
-      {bicho:"Elefante", num:"5545"},
-      {bicho:"Burro", num:"2011"},
-      {bicho:"Avestruz", num:"3503"},
-      {bicho:"Cachorro", num:"9220"}
-    ], pregos:[{bicho:"Carneiro", num:"7126"}] },
+    { bicho:"Porco",
+      puxa:[
+        {bicho:"Elefante", num:"5545"},
+        {bicho:"Burro", num:"2011"},
+        {bicho:"Avestruz", num:"3503"},
+        {bicho:"Cachorro", num:"9220"}
+      ],
+      pregos:[{bicho:"Carneiro", num:"7126"}]
+    },
 
-    { bicho:"Pavão", puxa:[
-      {bicho:"Touro", num:"2883"},
-      {bicho:"Urso", num:"1990"},
-      {bicho:"Cobra", num:"2636"},
-      {bicho:"Avestruz", num:"1001"}
-    ], pregos:[{bicho:"Cabra", num:"2222"}] },
+    { bicho:"Pavão",
+      puxa:[
+        {bicho:"Touro", num:"2883"},
+        {bicho:"Urso", num:"1990"},
+        {bicho:"Cobra", num:"2636"},
+        {bicho:"Avestruz", num:"1001"}
+      ],
+      pregos:[{bicho:"Cabra", num:"2222"}]
+    },
 
-    { bicho:"Peru", puxa:[
-      {bicho:"Tigre", num:"9886"},
-      {bicho:"Macaco", num:"0268"},
-      {bicho:"Cavalo", num:"0342"},
-      {bicho:"Vaca", num:"3798"}
-    ], pregos:[{bicho:"Cachorro", num:"7418"}] },
+    { bicho:"Peru",
+      puxa:[
+        {bicho:"Tigre", num:"9886"},
+        {bicho:"Macaco", num:"0268"},
+        {bicho:"Cavalo", num:"0342"},
+        {bicho:"Vaca", num:"3798"}
+      ],
+      pregos:[{bicho:"Cachorro", num:"7418"}]
+    },
 
-    { bicho:"Touro", puxa:[
-      {bicho:"Cavalo", num:"1444"},
-      {bicho:"Pavão", num:"1575"},
-      {bicho:"Cabra", num:"0221"},
-      {bicho:"Vaca", num:"7700"}
-    ], pregos:[{bicho:"Borboleta", num:"9815"}] },
+    { bicho:"Touro",
+      puxa:[
+        {bicho:"Cavalo", num:"1444"},
+        {bicho:"Pavão", num:"1575"},
+        {bicho:"Cabra", num:"0221"},
+        {bicho:"Vaca", num:"7700"}
+      ],
+      pregos:[{bicho:"Borboleta", num:"9815"}]
+    },
 
-    { bicho:"Tigre", puxa:[
-      {bicho:"Peru", num:"1980"},
-      {bicho:"Borboleta", num:"8115"},
-      {bicho:"Gato", num:"1853"},
-      {bicho:"Leão", num:"2163"}
-    ], pregos:[{bicho:"Burro", num:"3009"}] },
+    { bicho:"Tigre",
+      puxa:[
+        {bicho:"Peru", num:"1980"},
+        {bicho:"Borboleta", num:"8115"},
+        {bicho:"Gato", num:"1853"},
+        {bicho:"Leão", num:"2163"}
+      ],
+      pregos:[{bicho:"Burro", num:"3009"}]
+    },
 
-    { bicho:"Urso", puxa:[
-      {bicho:"Borboleta", num:"0816"},
-      {bicho:"Cavalo", num:"2743"},
-      {bicho:"Camelo", num:"9229"},
-      {bicho:"Carneiro", num:"3827"}
-    ], pregos:[{bicho:"Águia", num:"0008"}] },
+    { bicho:"Urso",
+      puxa:[
+        {bicho:"Borboleta", num:"0816"},
+        {bicho:"Cavalo", num:"2743"},
+        {bicho:"Camelo", num:"9229"},
+        {bicho:"Carneiro", num:"3827"}
+      ],
+      pregos:[{bicho:"Águia", num:"0008"}]
+    },
 
-    { bicho:"Veado", puxa:[
-      {bicho:"Elefante", num:"1345"},
-      {bicho:"Burro", num:"2510"},
-      {bicho:"Vaca", num:"9999"},
-      {bicho:"Galo", num:"1250"}
-    ], pregos:[{bicho:"Avestruz", num:"0301"}] },
+    { bicho:"Veado",
+      puxa:[
+        {bicho:"Elefante", num:"1345"},
+        {bicho:"Burro", num:"2510"},
+        {bicho:"Vaca", num:"9999"},
+        {bicho:"Galo", num:"1250"}
+      ],
+      pregos:[{bicho:"Avestruz", num:"0301"}]
+    },
 
-    { bicho:"Vaca", puxa:[
-      {bicho:"Avestruz", num:"4704"},
-      {bicho:"Elefante", num:"5445"},
-      {bicho:"Veado", num:"0993"},
-      {bicho:"Touro", num:"1983"}
-    ], pregos:[{bicho:"Vaca", num:"0000"}] },
-  ];
-
-  const grid = document.getElementById("grid");
-  const q = document.getElementById("q");
-  const count = document.getElementById("count");
-
-  const modalWrap = document.getElementById("modalWrap");
-  const modalEmoji = document.getElementById("modalEmoji");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalSub   = document.getElementById("modalSub");
-  const modalList  = document.getElementById("modalList");
-  const pregoList  = document.getElementById("pregoList");
-  const closeBtn   = document.getElementById("closeBtn");
-
-  function normalize(s){
-    return (s||"").toString().toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-  }
-  function buildSearchText(item){
-    const parts = [item.bicho];
-    (item.puxa||[]).forEach(x=>parts.push(x.bicho, x.num));
-    (item.pregos||[]).forEach(x=>parts.push("prego", x.bicho, x.num));
-    return normalize(parts.join(" | "));
-  }
-
-  function renderCards(list){
-    grid.innerHTML = "";
-    list.forEach(item=>{
-      const total = item.puxa?.length || 0;
-      const pregos = item.pregos?.length || 0;
-
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <div class="cardInner">
-          <div class="row">
-            <div class="left">
-              <div class="bichoIcon">${emo(item.bicho)}</div>
-              <div style="min-width:0;">
-                <p class="bichoName">${item.bicho}</p>
-                <div class="meta">${total} puxadas${pregos ? ` • ${pregos} prego(s)` : ""}</div>
-              </div>
-            </div>
-            <div class="badgeCount">${total}</div>
-          </div>
-
-          <div class="hint">
-            <span style="display:flex;align-items:center;gap:8px;">
-              <span class="spark"></span>
-              Toque para abrir
-            </span>
-            <span style="color: rgba(169,198,246,.75); font-size:12px;">Ver detalhes</span>
-          </div>
-        </div>
-      `;
-      card.addEventListener("click", ()=>openModal(item));
-      grid.appendChild(card);
-    });
-    count.textContent = `${list.length} bichos`;
-  }
-
-  function makeRow(bicho, num, note="Puxada"){
-    const row = document.createElement("div");
-    row.className = "item";
-    row.innerHTML = `
-      <div class="itemLeft">
-        <div class="itemEmoji">${emo(bicho)}</div>
-        <div class="itemTxt">
-          <b>${bicho}</b>
-          <small>${note}</small>
-        </div>
-      </div>
-      <div class="num">${num}</div>
-    `;
-    return row;
-  }
-
-  function makePregoRow(bicho, num){
-    const row = document.createElement("div");
-    row.className = "pregoItem";
-    row.innerHTML = `
-      <div class="itemLeft">
-        <div class="itemEmoji">🔩</div>
-        <div class="itemTxt">
-          <b>Prego ${bicho}</b>
-          <small>Entrada de prego</small>
-        </div>
-      </div>
-      <div class="num">${num}</div>
-    `;
-    return row;
-  }
-
-  function openModal(item){
-    modalEmoji.textContent = emo(item.bicho);
-    modalTitle.textContent = item.bicho;
-    modalSub.textContent = "O que puxa";
-
-    modalList.innerHTML = "";
-    pregoList.innerHTML = "";
-
-    (item.puxa||[]).forEach(x=>{
-      modalList.appendChild(makeRow(x.bicho, x.num, "Puxada"));
-    });
-
-    if((item.pregos||[]).length){
-      (item.pregos||[]).forEach(p=>{
-        pregoList.appendChild(makePregoRow(p.bicho, p.num));
-      });
-    } else {
-      const empty = document.createElement("div");
-      empty.className = "pregoItem";
-      empty.innerHTML = `
-        <div class="itemLeft">
-          <div class="itemEmoji">🔩</div>
-          <div class="itemTxt">
-            <b>Sem prego</b>
-            <small>Não informado</small>
-          </div>
-        </div>
-        <div class="num">—</div>
-      `;
-      pregoList.appendChild(empty);
+    { bicho:"Vaca",
+      puxa:[
+        {bicho:"Avestruz", num:"4704"},
+        {bicho:"Elefante", num:"5445"},
+        {bicho:"Veado", num:"0993"},
+        {bicho:"Touro", num:"1983"}
+      ],
+      pregos:[{bicho:"Vaca", num:"0000"}]
     }
-
-    document.body.classList.add("modal-open");
-    modalWrap.style.display = "flex";
-    modalWrap.setAttribute("aria-hidden","false");
-  }
-
-  function closeModal(){
-    modalWrap.style.display = "none";
-    modalWrap.setAttribute("aria-hidden","true");
-    document.body.classList.remove("modal-open");
-  }
-
-  closeBtn.addEventListener("click", closeModal);
-  modalWrap.addEventListener("click", (e)=>{ if(e.target===modalWrap) closeModal(); });
-  window.addEventListener("keydown", (e)=>{ if(e.key==="Escape") closeModal(); });
-
-  function filterData(term){
-    const t = normalize(term).trim();
-    if(!t) return DATA;
-    return DATA.filter(item => buildSearchText(item).includes(t));
-  }
-
-  q.addEventListener("input", ()=> renderCards(filterData(q.value)));
-  renderCards(DATA);
+  ];
 </script>
 </body>
 </html>

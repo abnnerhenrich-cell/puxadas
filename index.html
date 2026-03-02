@@ -55,7 +55,6 @@
       padding: 22px 16px calc(34px + env(safe-area-inset-bottom));
     }
 
-    /* HEADER */
     header{
       padding: 18px 0 14px;
       margin-bottom: 14px;
@@ -99,14 +98,7 @@
       letter-spacing:.2px;
       line-height:1.1;
     }
-    .by{
-      margin:0;
-      color: rgba(169,198,246,.92);
-      font-size:13px;
-    }
-    .by b{ color: var(--accent2); font-weight:900; }
 
-    /* SEARCH */
     .tools{flex:1;min-width:260px;display:flex;justify-content:flex-end;}
     .search{
       width:min(540px,100%);
@@ -141,7 +133,6 @@
       white-space:nowrap;
     }
 
-    /* GRID + CARDS */
     .grid{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -234,7 +225,6 @@
       box-shadow: 0 0 18px rgba(123,224,255,.65);
     }
 
-    /* MODAL (CORRIGIDO 100% + lindo no celular) */
     .modalWrap{
       position: fixed;
       inset: 0;
@@ -306,7 +296,6 @@
       color: rgba(169,198,246,.90);
     }
 
-    /* ✅ Botão fechar fixo e bonito (não invade o conteúdo) */
     .closeBtn{
       border:none;
       border-radius: 16px;
@@ -325,7 +314,6 @@
     .closeBtn:hover{ filter: brightness(1.08); }
     .closeBtn:active{ transform: scale(.98); }
 
-    /* Conteúdo rolável dentro do modal */
     .modalBody{
       padding: 14px 14px 16px;
       overflow:auto;
@@ -406,7 +394,6 @@
     }
     .pregoItem b{ color: var(--warn); }
 
-    /* MOBILE */
     @media (max-width: 520px){
       h1{ font-size:20px; }
       .logo{ width:52px;height:52px;border-radius:16px; }
@@ -442,7 +429,6 @@
     <section class="grid" id="grid"></section>
   </div>
 
-  <!-- MODAL -->
   <div class="modalWrap" id="modalWrap" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modalHeader">
@@ -729,6 +715,158 @@
       pregos:[{bicho:"Vaca", num:"0000"}]
     }
   ];
+
+  // ---------- APP ----------
+  const grid = document.getElementById("grid");
+  const q = document.getElementById("q");
+  const count = document.getElementById("count");
+
+  const modalWrap = document.getElementById("modalWrap");
+  const modalEmoji = document.getElementById("modalEmoji");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalSub   = document.getElementById("modalSub");
+  const modalList  = document.getElementById("modalList");
+  const pregoList  = document.getElementById("pregoList");
+  const closeBtn   = document.getElementById("closeBtn");
+
+  function normalize(s){
+    return (s||"").toString().toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  }
+
+  function buildSearchText(item){
+    const parts = [item.bicho];
+    (item.puxa||[]).forEach(x=>parts.push(x.bicho, x.num));
+    (item.pregos||[]).forEach(x=>parts.push("prego", x.bicho, x.num));
+    return normalize(parts.join(" | "));
+  }
+
+  function makeRow(bicho, num, note="Puxada"){
+    const row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = `
+      <div class="itemLeft">
+        <div class="itemEmoji">${emo(bicho)}</div>
+        <div class="itemTxt">
+          <b>${bicho}</b>
+          <small>${note}</small>
+        </div>
+      </div>
+      <div class="num">${num}</div>
+    `;
+    return row;
+  }
+
+  function makePregoRow(bicho, num){
+    const row = document.createElement("div");
+    row.className = "pregoItem";
+    row.innerHTML = `
+      <div class="itemLeft">
+        <div class="itemEmoji">🔩</div>
+        <div class="itemTxt">
+          <b>Prego ${bicho}</b>
+          <small>Entrada de prego</small>
+        </div>
+      </div>
+      <div class="num">${num}</div>
+    `;
+    return row;
+  }
+
+  function openModal(item){
+    modalEmoji.textContent = emo(item.bicho);
+    modalTitle.textContent = item.bicho;
+    modalSub.textContent = "O que puxa";
+
+    modalList.innerHTML = "";
+    pregoList.innerHTML = "";
+
+    (item.puxa||[]).forEach(x=>{
+      modalList.appendChild(makeRow(x.bicho, x.num, "Puxada"));
+    });
+
+    if((item.pregos||[]).length){
+      (item.pregos||[]).forEach(p=>{
+        pregoList.appendChild(makePregoRow(p.bicho, p.num));
+      });
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "pregoItem";
+      empty.innerHTML = `
+        <div class="itemLeft">
+          <div class="itemEmoji">🔩</div>
+          <div class="itemTxt">
+            <b>Sem prego</b>
+            <small>Não informado</small>
+          </div>
+        </div>
+        <div class="num">—</div>
+      `;
+      pregoList.appendChild(empty);
+    }
+
+    document.body.classList.add("modal-open");
+    modalWrap.style.display = "flex";
+    modalWrap.setAttribute("aria-hidden","false");
+  }
+
+  function closeModal(){
+    modalWrap.style.display = "none";
+    modalWrap.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-open");
+  }
+
+  function renderCards(list){
+    grid.innerHTML = "";
+    list.forEach(item=>{
+      const total = item.puxa?.length || 0;
+      const pregos = item.pregos?.length || 0;
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="cardInner">
+          <div class="row">
+            <div class="left">
+              <div class="bichoIcon">${emo(item.bicho)}</div>
+              <div style="min-width:0;">
+                <p class="bichoName">${item.bicho}</p>
+                <div class="meta">${total} puxadas${pregos ? ` • ${pregos} prego(s)` : ""}</div>
+              </div>
+            </div>
+            <div class="badgeCount">${total}</div>
+          </div>
+
+          <div class="hint">
+            <span style="display:flex;align-items:center;gap:8px;">
+              <span class="spark"></span>
+              Toque para abrir
+            </span>
+            <span style="color: rgba(169,198,246,.75); font-size:12px;">Ver detalhes</span>
+          </div>
+        </div>
+      `;
+      card.addEventListener("click", ()=>openModal(item));
+      grid.appendChild(card);
+    });
+
+    count.textContent = `${list.length} bichos`;
+  }
+
+  function filterData(term){
+    const t = normalize(term).trim();
+    if(!t) return DATA;
+    return DATA.filter(item => buildSearchText(item).includes(t));
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+  modalWrap.addEventListener("click", (e)=>{ if(e.target===modalWrap) closeModal(); });
+  window.addEventListener("keydown", (e)=>{ if(e.key==="Escape") closeModal(); });
+
+  q.addEventListener("input", ()=> renderCards(filterData(q.value)));
+
+  // START
+  renderCards(DATA);
 </script>
 </body>
 </html>
